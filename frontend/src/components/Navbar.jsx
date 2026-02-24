@@ -72,7 +72,7 @@ const Navbar = () => {
       </div>
       {/* mobile menu */}
       <div
-        className={`absolute top-17.5 border left-0 right-0 bottom-0  overflow-hidden bg-gray-700   transition duration-300 ${visible ? "w-full" : "w-0"}`}
+        className={`absolute top-17.5  left-0 right-0 bottom-0  overflow-hidden bg-gray-700   transition duration-300 ${visible ? "w-full" : "w-0"}`}
       >
         <div className="flex flex-col text-white pt-5 pl-5">
           <p className="flex gap-2 py-2 pl-6">
