@@ -11,3 +11,5 @@
 1.create pages and complete routing part
 2.(page)->App.js->Routing
 3.create Navbar with Logo desktop menu icons and mobile menu
+4.create hero section and inject it to home page
+5.create shopContext to provide products
