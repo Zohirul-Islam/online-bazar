@@ -11,6 +11,7 @@ import PlaceOrder from './pages/PlaceOrder'
 import Product from './pages/Product'
 import NotFound from './pages/NotFound'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/product/:productId' element={<Product />} />
         <Route path='*' element={ <NotFound/>} />
       </Routes>
+      <Footer/>
     </div>
   )
 }
