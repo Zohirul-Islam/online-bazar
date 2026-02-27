@@ -70,10 +70,10 @@ const Collection = () => {
           </div>
 
           {/* PRODUCT SORT */}
-          <select className="text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-none w-full sm:w-auto">
-            <option value="relavent">Sort by: Relevant</option>
-            <option value="low-high">Price: Low to High</option>
-            <option value="high-low">Price: High to Low</option>
+          <select className="text-sm  border border-gray-300 rounded-md px-3 py-2 focus:outline-none w-full sm:w-40">
+            <option value="relavent">Relevant</option>
+            <option value="low-high">Low → High</option>
+            <option value="high-low">High → Low</option>
           </select>
         </div>
       </div>
