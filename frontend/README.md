@@ -12,4 +12,8 @@
 2.(page)->App.js->Routing
 3.create Navbar with Logo desktop menu icons and mobile menu
 4.create hero section and inject it to home page
-5.create shopContext to provide products
+5.create shopContext to provide products;
+## collection page feature
+1.filter products 
+2.sort products
+3.search products
