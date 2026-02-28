@@ -1,4 +1,12 @@
+## project feature
+1.infinite scroll
+2.pagination
+3.filter product
+4.sort product
+5.search product
 
+## package
+react quary
 
 
 
@@ -17,3 +25,5 @@
 1.filter products 
 2.sort products
 3.search products
+## Search functionality
+create state for serch in context then available it for any component
