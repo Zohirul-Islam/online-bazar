@@ -34,4 +34,6 @@ create state for serch in context then available it for any component
 create state for single product
 1.get product id via useParams hook
 2.take products from context
+## CART FUNCTIONALITY
+
 

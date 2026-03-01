@@ -41,6 +41,7 @@ const Product = () => {
                 key={index}
                 src={item}
                 alt="product image"
+                className="w-[24%] sm:w-full sm:mb-3 shrink-0 cursor-pointer"
               />
             ))}
           </div>
