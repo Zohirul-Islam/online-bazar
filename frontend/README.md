@@ -15,6 +15,9 @@ react quary
 2.pages
 3.context
 4.hooks
+## Api
+/products
+/products/id
 ## project work step
 1.create pages and complete routing part
 2.(page)->App.js->Routing
@@ -27,3 +30,8 @@ react quary
 3.search products
 ## Search functionality
 create state for serch in context then available it for any component
+## single product page
+create state for single product
+1.get product id via useParams hook
+2.take products from context
+
