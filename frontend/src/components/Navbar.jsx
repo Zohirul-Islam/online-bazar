@@ -6,10 +6,12 @@ import { BsCollectionFill } from "react-icons/bs";
 import { TbListDetails } from "react-icons/tb";
 import { MdContactPhone } from "react-icons/md";
 import { ShopContext } from "../context/ShopContext";
+import useCart from "../hooks/useCart";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch,getCartCount } = useContext(ShopContext);
+  const { setShowSearch } = useContext(ShopContext);
+  const { getCartCount } = useCart();
   return (
     <div className="flex items-center justify-between py-5 font-medium">
       {/* Logo */}

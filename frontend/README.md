@@ -35,5 +35,8 @@ create state for single product
 1.get product id via useParams hook
 2.take products from context
 ## CART FUNCTIONALITY
-
+## FOLLOW THIS PATTERN 
+Context → for global state
+useReducer → for state logic
+Custom Hook → for reusable functions
 

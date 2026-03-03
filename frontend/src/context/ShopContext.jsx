@@ -1,13 +1,15 @@
 import { createContext, useEffect, useState } from "react";
 import { products } from "../assets/assets";
 import useCart from "../hooks/useCart";
+import { useNavigate } from "react-router-dom";
 
 export const ShopContext = createContext();
 
 const ShopContextProvider = ({ children }) => {
   const [search, setSearch] = useState("");
+  const [cartItems, setCartItems] = useState({});
   const [showSearch, setShowSearch] = useState(false);
-  const { cartItems, addToCart, getCartCount } = useCart();
+  const navigate = useNavigate();
   const currency = "$";
   const delivery_fee = 10;
   const value = {
@@ -19,8 +21,9 @@ const ShopContextProvider = ({ children }) => {
     showSearch,
     setShowSearch,
     cartItems,
-    addToCart,
-    getCartCount,
+    setCartItems,
+    navigate
+    
   };
   useEffect(() => {
     console.log(cartItems);

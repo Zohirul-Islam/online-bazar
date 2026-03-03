@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import RelatedProducts from "../components/RelatedProducts";
+import useCart from "../hooks/useCart";
 
 const Product = () => {
   const { productId } = useParams();
-  const { products, currency ,addToCart} = useContext(ShopContext);
+  const { products, currency } = useContext(ShopContext);
+  const { addToCart } = useCart();
   /* state */
   const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
