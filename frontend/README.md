@@ -39,4 +39,5 @@ create state for single product
 Context → for global state
 useReducer → for state logic
 Custom Hook → for reusable functions
-
+## application flow
+collection-product-cart-placeOrder-orders
