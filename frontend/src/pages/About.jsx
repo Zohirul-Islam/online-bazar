@@ -1,5 +1,6 @@
 import { assets } from "../assets/assets";
-import Newsletterbox from "../components/NewsLetterBox";
+import Newsletterbox from "../components/NewsletterBox";
+
 import Title from "../components/Title";
 
 
