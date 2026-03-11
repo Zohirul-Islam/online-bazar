@@ -13,7 +13,7 @@ const Login = () => {
   }
   return (
     <form
-      action={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
       className="w-[90%] sm:max-w-96 m-auto mt-14 text-gray-800 p-5 border flex flex-col gap-4"
     >
       <div className="inline-flex items-center gap-2 mb-2 mt-10">
@@ -62,7 +62,7 @@ const Login = () => {
             :<p onClick={()=>setCurrentState("Login")} className="cursor-pointer">Login here</p>
         }
       </div>
-      <button className="bg-black text-white font-light px-8 py-2 mt-4">{currentState === "Login"?"Sign In":"Sign Up" }</button>
+      <button type="submit" className="bg-black text-white font-light px-8 py-2 mt-4">{currentState === "Login"?"Sign In":"Sign Up" }</button>
     </form>
   );
 };
