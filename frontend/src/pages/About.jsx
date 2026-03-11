@@ -1,6 +1,7 @@
 import { assets } from "../assets/assets";
+import Newsletterbox from "../components/NewsLetterBox";
 import Title from "../components/Title";
-import Newsletterbox from '../components/Newsletterbox'
+
 
 const About = () => {
   return (
@@ -10,7 +11,7 @@ const About = () => {
       </div>
       <div className="flex flex-col my-10 md:flex-row gap-16">
         <img
-          className="w-full md:max-w-[450px]"
+          className="w-full md:max-w-112.5"
           src={assets.about_img}
           alt=""
         />
