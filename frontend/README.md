@@ -41,3 +41,6 @@ useReducer → for state logic
 Custom Hook → for reusable functions
 ## application flow
 collection-product-cart-placeOrder-orders
+login page
+about page
+contact page
