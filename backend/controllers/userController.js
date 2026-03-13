@@ -37,10 +37,35 @@ try {
 }
 }
 const userLogin = async (req,res) => {
-    res.send("login controller")
+    try {
+        const { email, password } = req.body;
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: "User not found.please enter valid email" });
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (isMatch) {
+            const token = createToken(user._id);
+            return res.status(200).json({ success: true, token, message: "Login successful" });
+        } else {
+            return res.status(400).json({ success: false, message: "wrong password" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({success:false,message:error.message})
+    }
 }
-const adminLogin = async (req,res) => {
-    res.send("admin controller");
+const adminLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            const token = jwt.sign(email + password, process.env.JWT_SECRET);
+            res.status(200).json({ success: true, token });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({success:false,message:error.message})
+    }
 }
 
 export {userLogin,userRegister,adminLogin}
