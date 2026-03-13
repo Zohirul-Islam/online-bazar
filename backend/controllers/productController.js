@@ -45,15 +45,32 @@ const removeProduct = async(req,res) => {
         res.status(500).json({success:false,message:error.message})
     }
 }
-const listProduct = async(req,res) => {
-    try {
-        const products = await productModel.find({});
-        res.status(200).json({ success: true, products });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: error.message });
-    }
-}
+const listProduct = async (req, res) => {
+  try {
+
+    const page = Number(req.query.page) || 1;   // current page
+    const limit = Number(req.query.limit) || 10; // products per page
+
+    const totalProducts = await productModel.countDocuments();
+
+    const products = await productModel
+      .find({})
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.status(200).json({
+      success: true,
+      products,
+      totalProducts,
+      totalPages: Math.ceil(totalProducts / limit),
+      currentPage: page
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 const singleProduct = async(req,res) => {
     try {
         const { productId } = req.body;
