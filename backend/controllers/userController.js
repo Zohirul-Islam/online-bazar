@@ -62,6 +62,8 @@ const adminLogin = async (req, res) => {
             const token = jwt.sign(email + password, process.env.JWT_SECRET);
             res.status(200).json({ success: true, token });
         }
+        
+
     } catch (error) {
         console.log(error);
         res.status(500).json({success:false,message:error.message})
