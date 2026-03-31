@@ -7,7 +7,7 @@ const Login = ({setToken}) => {
     const loginHandler = async(data) => {
         try {
             const response = await axios.post(backendUrl + '/api/user/admin', data);
-            console.log(response);
+            
             if (response.data.success) {
                 toast.success(response.data.message);
                 setToken(response.data.token);

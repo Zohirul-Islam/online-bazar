@@ -5,7 +5,11 @@ export const getProduct = async() => {
     return data;
 }
 export const createProduct = async(product) => {
-    const { data } = await axiosInstance.post('/product/add', product);
+    const { data } = await axiosInstance.post('/product/add', product, {
+        headers: {
+            "Content-Type":"multipart/form-data"
+        }
+    });
     return data;
 }
 export const deleteProduct = async (id) => {
