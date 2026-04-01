@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import {useMutation} from '@tanstack/react-query'
-import axios from 'axios';
-import { backendUrl } from "../App";
+
 import { toast } from "react-toastify";
 import { loginUser } from "../api/authUser";
 
-const Login = () => {
+const Login = ({setToken}) => {
     const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { mutate, isPending, isError, error, isSuccess } = useMutation({
@@ -13,6 +12,7 @@ const Login = () => {
     onSuccess: (data) => {
       console.log("Login Success", data);
       toast.success("Login Successfull");
+      setToken(data.token);
     }
   })
   
