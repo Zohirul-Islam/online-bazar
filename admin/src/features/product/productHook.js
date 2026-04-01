@@ -7,6 +7,7 @@ export const useCreateProduct = () => {
     return useMutation({
         mutationFn: createProduct,
       onSuccess: (data) => {
+        console.log(data);
         
             toast.success(data.message || "Product added")
            qc.invalidateQueries({ queryKey: ["products"] })
