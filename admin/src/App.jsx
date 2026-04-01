@@ -10,17 +10,15 @@ import Orders from './pages/Orders'
 import Login from './components/Login'
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token'):'');
+  const [token, setToken] = useState('');
 
-  useEffect(() => {
-    localStorage.setItem("token", token);
-  },[token])
+  
   return (
     <div className='bg-gray-50 h-screen'>
       <ToastContainer/>
-      {token === '' ? <Login setToken={setToken} /> :
+      {token === '' ? <Login /> :
         <>
-        <Navbar setToken ={setToken} />
+        <Navbar  />
         <hr />
         <div className='flex w-full'>
           <Sidebar />

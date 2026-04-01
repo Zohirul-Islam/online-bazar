@@ -1,25 +1,24 @@
 import React, { useState } from "react";
+import {useMutation} from '@tanstack/react-query'
 import axios from 'axios';
 import { backendUrl } from "../App";
 import { toast } from "react-toastify";
+import { loginUser } from "../api/authUser";
 
-const Login = ({setToken}) => {
+const Login = () => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const { mutate, isPending, isError, error, isSuccess } = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      console.log("Login Success", data);
+      toast.success("Login Successfull");
+    }
+  })
+  
     const onSubmitHandler = async (e) => {
-        
-        try {
-            e.preventDefault();
-            const response = await axios.post(backendUrl + '/api/user/admin', { email, password });
-            if (response.data.success) {
-                setToken(response.data.token)
-            } else {
-                toast.error(response.data.message);
-            }
-        } catch (error) {
-            console.log(error);
-            toast.error(error.message);
-        }
+        e.preventDefault();
+      mutate({ email, password });
     }
   return (
     <div className="min-h-screen flex items-center justify-center w-full">
