@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
-const Add = () => {
-
+import { useCreateProduct } from "../features/product/productHook";
+const Add = ({token}) => {
+  const { mutate, isPending } = useCreateProduct();
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
@@ -38,8 +39,9 @@ const Add = () => {
       image1 &&formData.append('image1', image1);
       image2 &&formData.append('image2', image2);
       image3 &&formData.append('image3', image3);
-      image4 &&formData.append('image4', image4);
+      image4 && formData.append('image4', image4);
       
+      mutate(formData);
     } catch (error) {
       
     }
@@ -211,7 +213,7 @@ const Add = () => {
         type="submit"
         className="w-28 py-3 mt-4 bg-black text-white cursor-pointer rounded-md"
       >
-        Add Product
+       {isPending ? "Adding..." : "Add Product"}
       </button>
     </form>
   );

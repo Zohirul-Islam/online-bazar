@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 export const useCreateProduct = () => {
     const qc = useQueryClient();
     return useMutation({
-        mutationFn: createProduct,
+      mutationFn: createProduct,
       onSuccess: (data) => {
-        console.log(data);
+          console.log(data);
         
             toast.success(data.message || "Product added")
            qc.invalidateQueries({ queryKey: ["products"] })

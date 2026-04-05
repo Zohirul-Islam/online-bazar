@@ -4,10 +4,12 @@ export const getProduct = async() => {
     const { data } = await axiosInstance.get('/product/list-product');
     return data;
 }
-export const createProduct = async(product) => {
+export const createProduct = async(product,token) => {
     const { data } = await axiosInstance.post('/product/add', product, {
         headers: {
-            "Content-Type":"multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`
+            
         }
     });
     return data;
