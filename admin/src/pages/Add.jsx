@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
-import { useCreateProduct } from "../features/product/productHook";
+import axios from "axios";
+import { backendUrl } from "../App";
+import { toast } from "react-toastify";
 const Add = ({token}) => {
-  const { mutate, isPending } = useCreateProduct();
+
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
@@ -17,6 +19,7 @@ const Add = ({token}) => {
 
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const toggleSize = (size) => {
     setSizes((prev) =>
@@ -25,8 +28,9 @@ const Add = ({token}) => {
         : [...prev, size]
     );
   };
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault();
+      setLoading(true);
     try {
       const formData = new FormData();
       formData.append("name", name);
@@ -40,14 +44,36 @@ const Add = ({token}) => {
       image2 &&formData.append('image2', image2);
       image3 &&formData.append('image3', image3);
       image4 && formData.append('image4', image4);
+      const response = await axios.post(backendUrl + '/api/product/add', formData, { headers: { token } });
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setName("");
+        setDescription("");
+        setPrice("");
+        setImage1("");
+        setImage2("");
+        setImage3("");
+        setImage4("")
+      } else {
+        toast.error(response.data.message);
+      }
       
-      mutate(formData);
     } catch (error) {
-      
+      console.log(error);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
     
   }
-
+  
+  if (loading) {
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <h1>Loading..........</h1>
+      </div>
+    )
+  }
   return (
     <form onSubmit={submitHandler} className="flex flex-col w-full items-start gap-3">
       
@@ -210,10 +236,11 @@ const Add = ({token}) => {
 
       {/* Submit */}
       <button
+        disabled ={loading}
         type="submit"
         className="w-28 py-3 mt-4 bg-black text-white cursor-pointer rounded-md"
       >
-       {isPending ? "Adding..." : "Add Product"}
+       {loading ? "adding...":"Add product"}
       </button>
     </form>
   );
