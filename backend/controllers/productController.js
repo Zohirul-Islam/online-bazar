@@ -51,7 +51,7 @@ const listProduct = async (req, res) => {
   try {
 
     const page = Number(req.query.page) || 1;   // current page
-    const limit = Number(req.query.limit) || 10; // products per page
+    const limit = Number(req.query.limit) || 5; // products per page
 
     const totalProducts = await productModel.countDocuments();
 
