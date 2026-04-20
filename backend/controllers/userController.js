@@ -27,7 +27,7 @@ try {
     })
     const user = await newUser.save();
     const token = createToken(user._id);
-    console.log(user);
+   
     res.status(201).json({ success: true, message:"user registration success",token });
 } catch (error) {
     res.status(500).json({

@@ -10,8 +10,16 @@ import useCart from "../hooks/useCart";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch } = useContext(ShopContext);
+  const { setShowSearch, userToken, setUserToken, navigate, setCartItems } =
+    useContext(ShopContext);
+
   const { getCartCount } = useCart();
+  const logout = () => {
+    navigate("/login");
+    localStorage.removeItem("token");
+    setUserToken("");
+    setCartItems({});
+  };
   return (
     <div className="flex items-center justify-between py-5 font-medium">
       {/* Logo */}
@@ -52,22 +60,31 @@ const Navbar = () => {
       </ul>
       {/* icons */}
       <div className="flex items-center gap-6">
-        <img onClick={()=>setShowSearch(true)} src={assets.search_icon} className="w-6 cursor-pointer" alt="" />
+        <img
+          onClick={() => setShowSearch(true)}
+          src={assets.search_icon}
+          className="w-6 cursor-pointer"
+          alt=""
+        />
         <div className="group relative">
-          <Link to={'/login'}>
           <img
+            onClick={()=>{if(!userToken)navigate('/login')}}
             src={assets.profile_icon}
             className="w-5 cursor-pointer"
             alt="profile-icon"
-            />
-            </Link>
-          <div className="hidden group-hover:block absolute dropdown-menu right-0 pt-4">
-            <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
-              <p className="cursor-pointer hover:text-black">My Profile</p>
-              <p className="cursor-pointer hover:text-black">My Orders</p>
-              <p className="cursor-pointer hover:text-black">Logout</p>
+          />
+          {/* dropdown */}
+          {userToken && (
+            <div className="hidden group-hover:block absolute dropdown-menu right-0 pt-4">
+              <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
+                <p className="cursor-pointer hover:text-black">My Profile</p>
+                <p onClick={()=>navigate('/orders')} className="cursor-pointer hover:text-black">My Orders</p>
+                <p onClick={logout} className="cursor-pointer hover:text-black">
+                  Logout
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <Link to="/cart" className="relative hidden sm:block">
           <img className="w-5 cursor-pointer" src={assets.cart_icon} alt="" />
@@ -89,34 +106,22 @@ const Navbar = () => {
           </p>
           <p className="flex gap-2 py-2 pl-6">
             <BsCollectionFill />
-            <NavLink
-              onClick={() => setVisible(false)}
-              
-              to="/collection"
-            >
+            <NavLink onClick={() => setVisible(false)} to="/collection">
               COLLECTION
             </NavLink>
           </p>
           <p className="flex gap-2 py-2 pl-6">
             <TbListDetails />
-            <NavLink
-              onClick={() => setVisible(false)}
-              
-              to="/about"
-            >
+            <NavLink onClick={() => setVisible(false)} to="/about">
               ABOUT
             </NavLink>
           </p>
 
           <p className="flex gap-2 py-2 pl-6">
             <MdContactPhone />
-            <NavLink
-            onClick={() => setVisible(false)}
-            
-            to="/contact"
-          >
-            CONTACT
-          </NavLink>
+            <NavLink onClick={() => setVisible(false)} to="/contact">
+              CONTACT
+            </NavLink>
           </p>
         </div>
       </div>

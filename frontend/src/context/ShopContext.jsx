@@ -14,6 +14,7 @@ const ShopContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const currency = "$";
   const delivery_fee = 10;
+  const [userToken, setUserToken] = useState('');
   const backendUrl = import.meta.env.VITE_BACKEND_URL
   // 🚀 React Query (replaces useEffect + useState for products)
   const {data:products,isLoading,isError,error } = useQuery({
@@ -21,7 +22,7 @@ const ShopContextProvider = ({ children }) => {
     queryFn: fetchProducts,
     staleTime: 1000 * 60 * 5
   })
-  console.log(products);
+  
   const value = {
     products: products || [],
     isLoading,
@@ -36,12 +37,19 @@ const ShopContextProvider = ({ children }) => {
     cartItems,
     setCartItems,
     navigate,
-    backendUrl
+    backendUrl,
+    userToken,
+    setUserToken
     
   };
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
+  useEffect(() => {
+    if (!userToken && localStorage.getItem('token')) {
+      setUserToken(localStorage.getItem('token'))
+    }
+  },[])
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };
